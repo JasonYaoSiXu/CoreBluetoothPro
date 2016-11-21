@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 import CoreLocation
-//6D810169-5797-4EF2-B141-554360C4086E
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -24,12 +24,13 @@ class ViewController: UIViewController {
     }
 
     func useBlueTooth() {
-        guard let proximityUUID: UUID = UUID(uuidString: "6D810169-5797-4EF2-B141-554360C4086E") else {
+        guard let proximityUUID: UUID = UUID(uuidString: "AE6C1280-0BEF-4FF8-AAD1-7495397FF826") else {
             return
         }
         
-        let coreBeaconRegion = CLBeaconRegion(proximityUUID: proximityUUID, identifier: "yaosixuBluetooth")
+        let coreBeaconRegion = CLBeaconRegion(proximityUUID: proximityUUID, major: 1, minor: 1, identifier: "yaosixu")
         let beaconPeripheralData: NSDictionary = coreBeaconRegion.peripheralData(withMeasuredPower: nil)
+        
         let peripheralManager: CBPeripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
         peripheralManager.startAdvertising(beaconPeripheralData as? [String: Any])
     }
